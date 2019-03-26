@@ -1,0 +1,32 @@
+.navbar {
+	background: rgba(52,58,64,0.8);
+}
+
+html,body{
+min-height: 100vh!important;
+height: auto!important;
+background-size: cover!important;
+font-family: 'Numans', sans-serif;
+background-attachment: fixed;
+}
+
+.navbar-fake {
+    opacity: 0;
+}
+
+@media (orientation:landscape) {
+    .hide-on-landscape {
+        display: none;
+    }
+}
+
+@media (orientation:portrait) {
+    .hide-on-portrait {
+        display: none;
+    }
+}
+
+h1 {
+	color:rgba(234,224,200,1.0)!important;
+}
+
