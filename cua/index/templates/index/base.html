@@ -1,0 +1,52 @@
+{% load staticfiles%}
+{% load tags %}
+
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'index/base.css' %}" async>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ComparteUA</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js" defer></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" async rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <a class="navbar-brand" href="#">ComparteUA</a>
+      {% if user.is_authenticated %}
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% active request index %}">
+            <a class="nav-link" href="{{ index }}">General</a>
+          </li>
+          <li class="nav-item {% active request items %}">
+            <a class="nav-link" href="{{ items }}">Objetos</a>
+          </li>
+          <li class="nav-item {% active request skills %}">
+            <a class="nav-link" href="{{ skills }}">Habilidades</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a></li>
+          </li>
+        </ul>
+        {% endif %}
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-fake">
+      <a class="navbar-brand" href="#">ComparteUA</a>
+    </nav>
+    <div class="container">
+    {% block body_block %}
+    {% endblock %}
+    </div>
+  </body>
+</html>
