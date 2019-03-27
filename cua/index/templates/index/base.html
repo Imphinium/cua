@@ -1,0 +1,46 @@
+{% load staticfiles%}
+{% load tags %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'index/base.css' %}" async>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CompartidosUA</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js" defer></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" async rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<div class="container-full">
+      <nav class="navbar navbar-expand-lg navbar-light">
+			  <a class="navbar-brand" href="/">CompartidosUA</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav ml-auto">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Subir</a>
+			      </li>
+			    </ul>
+	        <form action="{% url 'results' %}" method="post"  class="form-inline my-2 my-lg-0 no-row-wrap">
+	        	{% csrf_token %}
+					  <input type="text" name="query" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-secondary" type="input" id="button-search">Buscar</button>
+					  </div>
+					</form>
+			  </div>
+			</nav>
+            {% block body_block %}
+            {% endblock %}
+
+</div> <!-- /container full -->
+</body>
+
+</html>
