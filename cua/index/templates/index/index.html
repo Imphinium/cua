@@ -1,0 +1,45 @@
+{% extends "index/base.html" %}
+{% block body_block %}
+{% load staticfiles%}
+
+
+      <div class="jumbotron text-center">
+        <h1>CompartidosUA</h1>
+        <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
+        <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+        {% csrf_token %}
+		  <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" type="submit" id="button-search">Buscar</button>
+		  </div>
+		</form>
+      </div>
+
+  	  <div class="container">	
+      <div class="row">
+        <div class="col-lg-6">
+          <h4>Codigo libre</h4>
+          <p>Todo el código es público en el <a href="#">repositorio oficial</a></p>
+
+          <h4>Comunitario</h4>
+          <p>La plataforma CompartidosUA está enteramente administrada por la comunidad.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>Privada</h4>
+          <p>Tus datos de descargas nunca serán rastreados y podrás subir tus documentos anónimamente</p>
+
+          <h4>Menos mierda</h4>
+          <p>Sabemos que estas aqui por los apuntes, así que toda la página está dedicada a ellos</p>
+        </div>
+      </div>
+      </div>
+  
+  	  <hr>
+  
+  	  <div class="jumbotron text-center">
+        <h1>Apoya a CompartidosUA</h1>
+        <p class="lead">Este proyecto comunitario no se podría llevar a cabo sin tu ayuda. Por favor, considera una pequeña donación a CompartidosUA para seguir trayéndote material de calidad, libre y sin anuncios.</p>
+        <p><a class="btn btn-large btn-success" href="#" target="ext">Patreon</a></p>
+      </div>
+{% endblock %}
