@@ -1,0 +1,32 @@
+{% extends "index/base.html" %}
+{% block body_block %}
+{% load staticfiles%}
+
+      <div class="jumbotron text-center">
+        <h1>CompartidosUA</h1>
+        <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
+        <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+        {% csrf_token %}
+      <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" id="button-search">Buscar</button>
+      </div>
+    </form>
+      </div>
+
+  	  <div class="container">	
+        <div class="jumbotron text-center">
+          <h1>{{ item.name }}</h1>
+          <p class="lead">{{ item.description }}</p>
+          <p><a class="btn btn-large btn-success" href="#" target="ext">Descargar</a></p>
+        </div>
+      </div>
+  
+  	  <hr>
+  
+  	  <div class="jumbotron text-center">
+        <h1>Apoya a CompartidosUA</h1>
+        <p class="lead">Este proyecto comunitario no se podría llevar a cabo sin tu ayuda. Por favor, considera una pequeña donación a CompartidosUA para seguir trayéndote material de calidad, libre y sin anuncios.</p>
+        <p><a class="btn btn-large btn-success" href="#" target="ext">Patreon</a></p>
+      </div>
+{% endblock %}
