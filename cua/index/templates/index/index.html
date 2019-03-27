@@ -6,12 +6,13 @@
       <div class="jumbotron text-center">
         <h1>CompartidosUA</h1>
         <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
-        <div class="input-group mb-3">
-		  <input type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+        <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+        {% csrf_token %}
+		  <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
 		  <div class="input-group-append">
-		    <button class="btn btn-outline-secondary" type="button" id="button-search">Buscar</button>
+		    <button class="btn btn-outline-secondary" type="submit" id="button-search">Buscar</button>
 		  </div>
-		</div>
+		</form>
       </div>
 
   	  <div class="container">	
