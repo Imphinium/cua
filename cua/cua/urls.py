@@ -21,8 +21,12 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import os
 
+"""
+ Frenzoid: We should add a suburl manipulator, in case this projects gets deployed on a suburl, for example
+           www.mydomain.com/cua/.
+           The suburl can be changed changing the env var or using a dotenv file.
+"""
 suburl = '';
-
 if os.environ['SUBURL']:
     suburl = os.environ['SUBURL']
 
