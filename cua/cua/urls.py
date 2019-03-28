@@ -30,4 +30,4 @@ if os.environ['SUBURL']:
 urlpatterns = [
     path(suburl + 'admin/', admin.site.urls),
     path(suburl, include('index.urls')),
-] + static(settings.FILES_URL, document_root=settings.FILES_ROOT)
+] + static(suburl + settings.FILES_URL, document_root=settings.FILES_ROOT)
