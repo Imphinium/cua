@@ -120,8 +120,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = 'static/'
-FILES_URL = 'files/'
+
+"""
+ Frenzoid: We should add a suburl manipulator, in case this project gets deployed on a suburl, for example
+           www.mydomain.com/cua/.
+           The suburl can be changed changing the env var or using a dotenv file.
+"""
+
+suburl = '';
+# If the env var is not empty, and if its value isn't "default", append the suburl.
+if os.environ['SUBURL'] and os.environ['SUBURL'] != 'default':
+    suburl = os.environ['SUBURL']
+
+STATIC_URL = suburl + '/static/'
+FILES_URL = suburl + '/files/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 FILES_ROOT = os.path.join(BASE_DIR, 'files')
