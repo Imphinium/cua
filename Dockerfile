@@ -5,5 +5,5 @@ COPY ./cua/requirements.txt /code
 RUN pip install -r /code/requirements.txt
 COPY ./cua /code
 WORKDIR /code
-EXPOSE 81
+EXPOSE 80
 CMD ['python','manage.py','runserver', '0.0.0.0:81']
