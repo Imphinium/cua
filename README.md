@@ -3,7 +3,7 @@ Código fuente de la página de ComparteUA
 
 
 ----------------------------------------
-- General Info.
+- Docker Info.
   - Dockerfied. exposed port 80 and 443.
   - Using Python v3.
 -----------------------------
