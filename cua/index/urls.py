@@ -12,5 +12,5 @@ urlpatterns = [
     path(suburl, views.index, name='index'),
     path(suburl + '/results/', views.results, name='results'),
     path(suburl + '/details/<str:item_id>/', views.details, name='details'),
-    pathsuburl(suburl + '/upload/', views.upload, name='upload'),
+    path(suburl + '/upload/', views.upload, name='upload'),
 ]
