@@ -5,7 +5,8 @@ COPY ./cua/requirements.txt /code
 RUN pip install -r /code/requirements.txt
 COPY ./cua /code
 WORKDIR /code
-SHELL ["/bin/bash", "-c"]
 EXPOSE 80
 EXPOSE 443
-CMD "python ./manage.py runserver 0.0.0.0:80"
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT ["python"]
+CMD ["./manage.py", "runserver", "0.0.0.0:80"
