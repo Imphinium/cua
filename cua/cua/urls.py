@@ -28,7 +28,8 @@ import os
 """
 
 suburl = '';
-if os.environ['SUBURL']:
+# If the env var is not empty, and if its value isn't "default", append the subdomain.
+if os.environ['SUBURL'] && os.environ['SUBURL'] != 'default':
     suburl = os.environ['SUBURL']
 
 
