@@ -11,6 +11,6 @@ WORKDIR /code
 
 EXPOSE 80
 EXPOSE 443
-
-CMD python ./manage.py runserver 0.0.0.0:80
+ENTRYPOINT /usr/bin/python
+CMD ["./manage.py", "runserver", "0.0.0.0:80"]
 
