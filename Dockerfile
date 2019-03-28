@@ -12,7 +12,7 @@ WORKDIR /code
 EXPOSE 80
 EXPOSE 443
 
+HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD curl -sS 127.0.0.1:80 || exit 1
 ENTRYPOINT python
 CMD ./manage.py runserver 0.0.0.0:80
 
-HEALTHCHECK CMD curl --fail http://localhost:80/ || exit 1
