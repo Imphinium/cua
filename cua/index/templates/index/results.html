@@ -12,7 +12,7 @@
             <p class="mb-1">{{ item.description }}</p>
             <div class="d-flex">
                 <small>Donec id elit non mi porta.</small>
-                <div class="btn btn-large btn-success ml-auto p-2" href="/" target="ext">Descargar</div>
+                <div class="btn btn-large btn-success ml-auto p-2" href="/files/{{ item.file.url }}" download>Descargar</div>
             </div>
         </a>
         {% endfor %}

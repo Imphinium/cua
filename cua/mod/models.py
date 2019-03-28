@@ -18,7 +18,7 @@ class Item(models.Model):
 	id = models.CharField(primary_key=True, default=IDClass.newID, max_length=12, unique=True, editable=False)
 	name = models.CharField(max_length=128)
 	description = models.CharField(max_length=512)
-	file = models.FileField(upload_to="files", null=True)
+	file = models.FileField(null=True)
 
 
 	def __str__ (self):
