@@ -64,20 +64,54 @@
         </span>UA
     </h1>
     <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
-    <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+    <form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="" class="text-justify">
         {% csrf_token %}
-        <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" id="button-search">Buscar</button>
+        <div class="form-group">
+            <label for="id_name">Nombre</label>
+            <input type="text" class="form-control" id="id_name" aria-describedby="nameHelp" placeholder="Introduce un nombre corto y explicativo" name="name" required>
+            <small id="nameHelp" class="form-text text-muted">Puede ser el nombre de la práctica, e incluir identificadores como el tema o la asignatura</small>
         </div>
+        <div class="form-group">
+            <label for="id_description">Descripción</label>
+            <textarea class="form-control" id="id_description" rows="3" name="description" required></textarea>
+            <small id="descHelp" class="form-text text-muted">Asegurate de explicar los contenidos de los apuntes. Puedes introducir tu nombre o alguna tag para identificarlo fácilmente mas tarde</small>
+        </div>
+        <div class="form-group">
+            <label for="id_file">Archivo</label>
+            <input type="file" class="form-control-file" id="id_file" name="file" required>
+        </div>
+        <input type="submit" />
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    // form upload
+    $('#id_ajax_upload_form').submit(function(e) {
+        e.preventDefault();
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                $('.error').remove();
+                console.log(response)
+                if (response.error) {
+                    $.each(response.errors, function(name, error) {
+                        error = '<small class="text-muted error">' + error + '</small>'
+                        $form.find('[name=' + name + ']').after(error);
+                    })
+                } else {
+                    alert(response.message)
+                    window.location = ""
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+    // end
+    </script>
 </div>
-<div class="container">
-    <div class="jumbotron text-center">
-        <h1>{{ item.name }}</h1>
-        <p class="lead">{{ item.description }}</p>
-        <p><a class="btn btn-large btn-success" href="/files/{{ item.file.url }}" download>Descargar</a></p>
-    </div>
-</div>
-<hr>
 {% endblock %}
