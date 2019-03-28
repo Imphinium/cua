@@ -34,6 +34,6 @@ if os.environ['SUBURL'] and os.environ['SUBURL'] != 'default':
 
 
 urlpatterns = [
-    path(suburl + 'admin/', admin.site.urls),
-    path(suburl, include('index.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('index.urls')),
 ] + static(suburl + settings.FILES_URL, document_root=settings.FILES_ROOT)
