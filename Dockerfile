@@ -1,7 +1,7 @@
 FROM python:3
 
 ENV PYTHONUNBUFFERED 1
-ENV SUBURL  
+ENV SUBURL ''
 
 RUN mkdir /code
 COPY ./cua/requirements.txt /code
