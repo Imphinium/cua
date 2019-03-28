@@ -8,4 +8,5 @@ Código fuente de la página de ComparteUA
 - External Resources may be required (sqldb).
 -----------------------------
 - ENV VARS:
-  - SUBURL: Specify a suburl in case the projects gets deployed on a suburl.
+  - SUBURL: (Default ''): Specifies a suburl in case the projects gets deployed on a suburl.
+  - PYTHONUNBUFFERED: (Default '1'): Allows python buffering.
