@@ -3,3 +3,4 @@ env/**
 **/migrations/**
 cua/db.sqlite3
 cua/cua/settings.py
+**/files/**
