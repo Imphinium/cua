@@ -1,6 +1,6 @@
 # ComparteUA
-Código fuente de la página de ComparteUA
-
+Sourcecode for the comparteUA project.
+- Main page: https://www.compartidosua.es/
 
 ----------------------------------------
 - Docker Info.
@@ -8,6 +8,6 @@ Código fuente de la página de ComparteUA
   - Using Python v3.
 -----------------------------
 - ENV VARS:
-  - SUBURL: (Default ''): Specifies a suburl in case the projects gets deployed on a suburl.
+  - SUBURL: Specifies a suburl in case the projects gets deployed on a suburl. (default value will be root's page).
   - PYTHONUNBUFFERED: (Default '1'): Allows python buffering.
 --------------------------------------
