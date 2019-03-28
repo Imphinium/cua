@@ -8,6 +8,4 @@ COPY ./cua /code
 WORKDIR /code
 EXPOSE 80
 EXPOSE 443
-SHELL ["/bin/bash", "-c"]
-ENTRYPOINT ["python"]
-CMD ["./manage.py", "runserver", "0.0.0.0:80"]
+CMD python ./manage.py runserver 0.0.0.0:80"]
