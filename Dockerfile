@@ -8,4 +8,4 @@ WORKDIR /code
 SHELL ["/bin/bash", "-c"]
 EXPOSE 80
 EXPOSE 443
-CMD ["python","./manage.py","runserver","0.0.0.0:80"]
+CMD "python ./manage.py runserver 0.0.0.0:80"
