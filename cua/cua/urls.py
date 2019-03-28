@@ -21,6 +21,6 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path(r'^$', include('index.urls')), # Regex: Starts and ends without nothing.
-    path(r'^admin/', admin.site.urls),  # Regex: Starts with 'admin/'.
+    path('', include('index.urls')), # Regex: Starts and ends without nothing.
+    path('admin/', admin.site.urls),  # Regex: Starts with 'admin/'.
 ] + static(settings.FILES_URL, document_root=settings.FILES_ROOT)
