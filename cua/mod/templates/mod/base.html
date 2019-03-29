@@ -1,0 +1,69 @@
+{% load staticfiles%}
+{% load tags %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'index/base.css' %}" async>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CompartidosUA</title>
+    <link rel="icon" href="{% static 'index/favicon.png' %}" type="image/png">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js" defer></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" async rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8673495335982040",
+        enable_page_level_ads: true
+    });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137195994-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137195994-1');
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'index/favicon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+            CompartidosUA
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'upload' %}">Subir</a>
+                </li>
+            </ul>
+            <form action="{% url 'results' %}" method="post" class="form-inline my-2 my-lg-0 no-row-wrap">
+                {% csrf_token %}
+                <input type="text" name="query" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="input" id="button-search">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div class="container-full">
+        {% block body_block %}
+        {% endblock %}
+        <div class="jumbotron text-center">
+            <h1>Apoya a CompartidosUA</h1>
+            <p class="lead">Este proyecto comunitario no se podría llevar a cabo sin tu ayuda. Por favor, considera una pequeña donación a CompartidosUA para seguir trayéndote material de calidad, libre y sin anuncios.</p>
+            <p><a class="btn btn-large btn-success" href="#" target="ext">Patreon</a></p>
+        </div>
+    </div> <!-- /container full -->
+</body>
+
+</html>

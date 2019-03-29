@@ -73,10 +73,19 @@
     </form>
 </div>
 <div class="container">
-    <div class="jumbotron text-center">
-        <h1>{{ item.name }}</h1>
-        <p class="lead">{{ item.description }}</p>
-        <p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Codigo libre</h4>
+            <p>Todo el código es público en el <a href="#">repositorio oficial</a></p>
+            <h4>Comunitario</h4>
+            <p>La plataforma CompartidosUA está enteramente administrada por la comunidad.</p>
+        </div>
+        <div class="col-lg-6">
+            <h4>Privada</h4>
+            <p>Tus datos de descargas nunca serán rastreados y podrás subir tus documentos anónimamente</p>
+            <h4>Menos mierda</h4>
+            <p>Sabemos que estas aqui por los apuntes, así que toda la página está dedicada a ellos</p>
+        </div>
     </div>
 </div>
 <hr>

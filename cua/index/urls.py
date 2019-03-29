@@ -8,4 +8,5 @@ urlpatterns = [
     path('results/', views.results, name='results'),
     path('details/<str:item_id>/', views.details, name='details'),
     path('upload/', views.upload, name='upload'),
+    path('download/<str:item_id>/', views.download, name='download'),
 ]
