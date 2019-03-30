@@ -48,5 +48,5 @@ def upload(request):
 def download(request, item_id):
 	item = Item.objects.get(id=item_id)
 	file = open(item.file.url, 'rb')
-	response = FileResponse(file)
+	response = FileResponse(file, as_attachment=True)
 	return response
