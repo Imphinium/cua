@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse, FileResponse, HttpResponseRedirect
 from .models import *
 
 # Create your views here.
@@ -36,3 +36,10 @@ def details(request, item_id):
 			context = {"item": item.get()}
 			return render(request, 'mod/details.html', context)
 	return HttpResponseRedirect(reverse('index'))
+
+@staff_member_required
+def download(request, item_id):
+	item = Item_Request.objects.get(id=item_id)
+	file = open(item.file.url, 'rb')
+	response = FileResponse(file, as_attachment=True)
+	return response

@@ -9,4 +9,5 @@ urlpatterns = [
     path('input/', views.input_view, name='input_mod'),
     path('tags/', views.tags_view, name='tags_mod'),
     path('details/<str:item_id>/', views.details, name='details_mod'),
+    path('download/<str:item_id>/', views.download, name='download_mod'),
 ]
