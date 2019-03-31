@@ -19,8 +19,8 @@ def logout_view(request):
 
 @staff_member_required
 def input_view(request):
-	contest = {'input':Item_Request.objects.all()}
-	return render(request, 'mod/input.html')
+	context = {'input':Item_Request.objects.all()}
+	return render(request, 'mod/input.html', context)
 
 @staff_member_required
 def tags_view(request):
