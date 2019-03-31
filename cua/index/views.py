@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from mod.models import *
-from django.http import JsonResponse, FileResponse
+from django.http import JsonResponse, FileResponse, HttpResponseRedirect
 from .forms import ItemUploadForm
 from django.db.models import Q
 from django.contrib.auth.views import login_required
@@ -31,7 +31,7 @@ def details(request, item_id):
 			context = {"item": Item.objects.get(id=item_id)}
 			print(context)
 			return render(request, 'index/details.html', context)
-	return render(request, 'index/index.html')
+	return HttpResponseRedirect(reverse('index'))
 
 def upload(request):
 	if request.method == 'POST':
