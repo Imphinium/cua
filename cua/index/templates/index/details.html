@@ -75,7 +75,7 @@
 <div class="container">
     <div class="jumbotron text-center">
         <h1>{{ item.name }}</h1>
-        <p class="lead">{{ item.description }}</p>
+        <p class="lead">{{ item.description|linebreaks }}</p>
         <p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>
     </div>
 </div>
