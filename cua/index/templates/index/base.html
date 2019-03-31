@@ -33,7 +33,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static 'index/favicon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
             CompartidosUA
         </a>
@@ -43,16 +43,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'upload' %}">Subir</a>
+                    <a class="nav-link" href="{% url 'logout_mod' %}">Subir</a>
                 </li>
+                <form action="{% url 'results' %}" method="post" class="form-inline my-2 my-lg-0" style="flex-flow:row!important;">
+                    {% csrf_token %}
+                    <input type="text" name="query" class="form-control" placeholder="Tema a buscar" aria-label="Tema a buscar" aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="input" id="button-search">Buscar</button>
+                    </div>
+                </form>
             </ul>
-            <form action="{% url 'results' %}" method="post" class="form-inline my-2 my-lg-0 no-row-wrap">
-                {% csrf_token %}
-                <input type="text" name="query" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="input" id="button-search">Buscar</button>
-                </div>
-            </form>
         </div>
     </nav>
     <div class="container-full">
