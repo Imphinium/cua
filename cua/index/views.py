@@ -28,8 +28,7 @@ def details(request, item_id):
 	if item_id:
 		item = Item.objects.filter(id=item_id)
 		if item.exists():
-			context = {"item": Item.objects.get(id=item_id)}
-			print(context)
+			context = {"item": item.get()}
 			return render(request, 'index/details.html', context)
 	return HttpResponseRedirect(reverse('index'))
 

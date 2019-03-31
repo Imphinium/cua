@@ -1,0 +1,25 @@
+{% extends "mod/base.html" %}
+{% block body_block %}
+{% load staticfiles%}
+<div class="jumbotron text-center">
+    <h1>C<span class="txt-rotate" data-period="2000" data-rotate='[ "ompartidos", "rea", "omunica", "onfia", "onstruye", "opia", "alcula", "olabora", "ita", "elebra" ]'>
+        </span>UA
+    </h1>
+    <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
+    <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+        {% csrf_token %}
+        <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-search">Buscar</button>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>{{ item.name }}</h1>
+        <p class="lead">{{ item.description|linebreaks }}</p>
+        <p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>
+    </div>
+</div>
+<hr>
+{% endblock %}

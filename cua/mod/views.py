@@ -24,4 +24,15 @@ def input_view(request):
 
 @staff_member_required
 def tags_view(request):
-	return render(request, 'mod/tags.html')
+	context = {'input':Tags_Request.objects.all()}
+	return render(request, 'mod/tags.html', context)
+
+
+@staff_member_required
+def details(request, item_id):
+	if item_id:
+		item = Item_Request.objects.filter(id=item_id)
+		if item.exists():
+			context = {"item": item.get()}
+			return render(request, 'mod/details.html', context)
+	return HttpResponseRedirect(reverse('index'))
