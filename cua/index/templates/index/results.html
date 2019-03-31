@@ -4,7 +4,7 @@
 <div class="container">
     <div class="list-group">
         {% for item in results %}
-        <a href="{% url 'details' item_id=item.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div onclick="location.href='{% url 'details' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ item.name }}</h5>
                 <small>3 days ago</small>
@@ -12,9 +12,9 @@
             <p class="mb-1">{{ item.description }}</p>
             <div class="d-flex">
                 <small>Donec id elit non mi porta.</small>
-                <div class="btn btn-large btn-success ml-auto p-2" href="/files/{{ item.file.url }}" download>Descargar</div>
+                <div class="btn btn-large btn-success ml-auto p-2" onclick="location.href='{% url 'download' item_id=item.id %}';event.stopPropagation();" download>Descargar</div>
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
 </div>
