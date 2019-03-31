@@ -4,5 +4,6 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='index_mod'),
+    path('logout/', views.logout_view, name='logout_mod'),
 ]

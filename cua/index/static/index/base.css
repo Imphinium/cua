@@ -6,15 +6,7 @@
 
 /* Custom navbar */
 .navbar-brand ,.navbar-nav>li>a {
-  	padding-left: 30px;
-    padding-right: 30px;
-	padding-top: 20px;
-	padding-bottom: 20px;
 } 
 .navbar-nav>.active>a {
 	opacity:.6;
-}
-
-.no-row-wrap {
-	flex-flow: inherit!important;
 }
