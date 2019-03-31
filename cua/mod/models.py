@@ -28,7 +28,9 @@ class Tag(models.Model):
 class Item(models.Model):
 	id = models.CharField(primary_key=True, default=IDClass.newID, max_length=12, editable=False)
 	name = models.CharField(max_length=128)
+	former_name = models.CharField(max_length=128, null=True, default=None)
 	description = models.CharField(max_length=512)
+	former_description = models.CharField(max_length=512, null=True, default=None)
 	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()), null=True)
 	creation_date = models.DateTimeField(default=timezone.now)
 	creator = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_DEFAULT)
