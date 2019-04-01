@@ -21,6 +21,19 @@
             </div>
         </div>
         {% endfor %}
+        {% if not input %}
+        <div class="jumbotron container">
+            <div class="d-flex flex-sm-row flex-column-reverse">
+                <div class="col-lg-6 align-self-center no-lp">
+                    <h3 class="mb-1">Lo sentimos</h3>
+                    <p class="mb-1">No se han encontrado mas solicitudes</p>
+                </div>
+                <div class="col-lg-6 no-lp">
+                    <img src="{% static 'index/sadbot.svg' %}" style="max-height:200px;">
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 <hr>
