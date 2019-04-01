@@ -38,10 +38,16 @@ def details(request, item_id):
 	return HttpResponseRedirect(reverse('index'))
 
 @staff_member_required
-def download(request, item_id):
+def download(request, item_id, **kwargs):
+	download = True
 	item = Item_Request.objects.get(id=item_id)
 	file = open(item.file.url, 'rb')
-	response = FileResponse(file, as_attachment=True)
+	try:
+		if kwargs["read"] == 1:
+			download=False
+	except:
+		pass
+	response = FileResponse(file, as_attachment=download)
 	return response
 
 @staff_member_required

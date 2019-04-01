@@ -8,9 +8,10 @@
         <p class="lead">{{ item.description|linebreaks }}</p>
         <p>
             <button type="button" class="btn btn-large btn-success " onclick="location.href='{% url 'approve' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsup" fill="white" %}</button>
-            <button type="button" class="btn btn-large btn-danger " onclick="location.href='{% url 'deny' item_id=item.id %}';event.stopPropagation();">>{% octicon "thumbsdown" fill="white" %}</button>
+            <button type="button" class="btn btn-large btn-danger " onclick="location.href='{% url 'deny' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsdown" fill="white" %}</button>
             <button class="btn btn-large btn-primary" onclick="location.href='{% url 'download_mod' item_id=item.id %}';event.stopPropagation();" download>Descargar</button>
         </p>
+        <embed src="{% url 'download_mod' item_id=item.id read=1 %}" width= "500" height= "375">
     </div>
 </div>
 <hr>
