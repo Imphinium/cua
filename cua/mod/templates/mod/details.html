@@ -1,11 +1,16 @@
 {% extends "mod/base.html" %}
 {% block body_block %}
 {% load staticfiles%}
+{% load octicons %}
 <div class="container">
     <div class="jumbotron text-center">
         <h1>{{ item.name }}</h1>
         <p class="lead">{{ item.description|linebreaks }}</p>
-        <p><a class="btn btn-large btn-success" href="{% url 'download_mod' item_id=item.id %}" download>Descargar</a></p>
+        <p>
+            <button type="button" class="btn btn-large btn-success " onclick="location.href='{% url 'approve' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsup" fill="white" %}</button>
+            <button type="button" class="btn btn-large btn-danger " onclick="location.href='{% url 'deny' item_id=item.id %}';event.stopPropagation();">>{% octicon "thumbsdown" fill="white" %}</button>
+            <button class="btn btn-large btn-primary" onclick="location.href='{% url 'download_mod' item_id=item.id %}';event.stopPropagation();" download>Descargar</button>
+        </p>
     </div>
 </div>
 <hr>

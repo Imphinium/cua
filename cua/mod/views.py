@@ -43,3 +43,18 @@ def download(request, item_id):
 	file = open(item.file.url, 'rb')
 	response = FileResponse(file, as_attachment=True)
 	return response
+
+@staff_member_required
+def approve(request, item_id):
+	item = Item_Request.objects.get(id=item_id)
+	newItem = Item(name=item.name,
+		description=item.description,
+		file=item.file,
+		creator=item.creator).save()
+	item.delete()
+	return HttpResponseRedirect(reverse('input_mod'))
+
+@staff_member_required
+def deny(request, item_id):
+	item = Item_Request.objects.get(id=item_id).delete()
+	return HttpResponseRedirect(reverse('input_mod'))
