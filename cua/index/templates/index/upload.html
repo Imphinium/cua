@@ -72,9 +72,10 @@
             <small id="nameHelp" class="form-text text-muted">Puede ser el nombre de la práctica, e incluir identificadores como el tema o la asignatura</small>
         </div>
         <div class="form-group">
-            <label for="id_tags">Tags</label>
-            <input type="text" class="form-control" id="id_tags" aria-describedby="nameHelp" placeholder="Introduce un nombre corto y explicativo" name="tags" required>
-            <small id="tagsHelp" class="form-text text-muted">Puede ser el nombre de la práctica, e incluir identificadores como el tema o la asignatura</small>
+            <label for="id_tags">Tags</label><br>
+            <span id="tagContainer"></span>
+            <input type="text" class="form-control" id="id_tags" aria-describedby="nameHelp" placeholder="Introduce las tags separadas por espacios" name="tags" required>
+            <small id="tagsHelp" class="form-text text-muted">Deben de ser los temas con los que se relaciona tu contrinución, por ejemplo MD, Calculo, IngInf1, Multimedia3</small>
         </div>
         <div class="form-group">
             <label for="id_description">Descripción</label>
@@ -88,6 +89,17 @@
         <input type="submit" />
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#id_tags").keyup(function(event) {
+            let arr = $(this).val().split(" ")
+            $("#tagContainer").empty()
+            for (i in arr) {
+                $("#tagContainer").append('   <span class="badge badge-info">' + (arr[i]) + '</span>');
+            }
+        });
+    });
+    </script>
     <script type="text/javascript">
     // form upload
     $('#id_ajax_upload_form').submit(function(e) {
