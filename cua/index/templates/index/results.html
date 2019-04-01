@@ -1,18 +1,25 @@
 {% extends "index/base.html" %}
 {% block body_block %}
-{% load staticfiles%}
+{% load staticfiles %}
+{% load octicons %}
 <div class="container">
     <div class="list-group">
         {% for item in results %}
         <a href="#" onclick="location.href='{% url 'details' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start ">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ item.name }}</h5>
-                <small>{{ item.creation_date|timesince }}</small>
+            <div class="row justify-content-start align-items-center">
+                <div class="col-1">
+                {% if item.file %}{% octicon "file-zip" heigth="64" width="64" %}{% elif item.video %}{% octicon "device-camera-video" heigth="64" width="64" %}{% endif %}
             </div>
-            <p class="mb-1">{{ item.description }}</p>
-            <div class="d-flex">
-                <h6>{% for tag in item.tags.all %}<div onclick="location.href='{% url 'results' %}?tags={{ tag }}';event.stopPropagation();"  class="badge badge-primary">{{ tag }}</div> {% endfor %}</h6>
-                <div class="btn btn-large btn-success ml-auto p-2" onclick="location.href='{% url 'download' item_id=item.id %}';event.stopPropagation();" download>Descargar</div>
+                <div class="col">
+                    <h5 class="mb-1">{{ item.name }}</h5>
+                    <p class="mb-1">{{ item.description }}</p>
+                    <h6>{% for tag in item.tags.all %}<div onclick="location.href='{% url 'results' %}?tags={{ tag }}';event.stopPropagation();" class="badge badge-primary">{{ tag }}</div> {% endfor %}</h6>
+                </div>
+                <div class="col-2 ml-auto d-flex flex-column">
+                    <small class="text-center">{{ item.creation_date|timesince }}</small><br>
+                    {% if item.file %}<div class="btn btn-large btn-success p-2" onclick="location.href='{% url 'download' item_id=item.id %}';event.stopPropagation();" download>Descargar</div>
+                    {% elif item.video %}<div class="btn btn-large btn-success p-2">Ver</div>{% endif %}
+                </div>
             </div>
         </a>
         {% endfor %}

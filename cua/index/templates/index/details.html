@@ -76,7 +76,8 @@
     <div class="jumbotron text-center">
         <h1>{{ item.name }}</h1>
         <p class="lead">{{ item.description|linebreaks }}</p>
-        <p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>
+        {% if item.file %}<p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>{% endif %}
+        {% if item.video %}<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ item.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>{% endif %}
     </div>
 </div>
 <hr>
