@@ -8,11 +8,11 @@
         <div onclick="location.href='{% url 'details_mod' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ item.name }}</h5>
-                <small>3 days ago</small>
+                <small>{{ item.creation_date|timesince }}</small>
             </div>
             <p class="mb-1">{{ item.description }}</p>
             <div class="d-flex">
-                <small>Donec id elit non mi porta.</small>
+                <h6>{% for tag in item.tags.all %}<div onclick="location.href='{% url 'results' %}?tags={{ tag }}';event.stopPropagation();"  class="badge badge-primary">{{ tag }}</div> {% endfor %}</h6>
                 <div class="ml-auto">
                     <button type="button" class="btn btn-large btn-success " onclick="location.href='{% url 'approve' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsup" fill="white" %}</button>
                     <button type="button" class="btn btn-large btn-danger " onclick="location.href='{% url 'deny' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsdown" fill="white" %}</button>

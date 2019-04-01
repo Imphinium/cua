@@ -64,7 +64,7 @@
         </span>UA
     </h1>
     <p class="lead">Tu web de apuntes, ejercicios y soluciones</p>
-    <form action="{% url 'results' %}" method="post" class="input-group mb-3">
+    <form action="{% url 'results' %}" method="get" class="input-group mb-3">
         {% csrf_token %}
         <input name="query" type="text" class="form-control" placeholder="Introduce tu tema a buscar" aria-label="Introduce tu tema a buscar" aria-describedby="button-search">
         <div class="input-group-append">

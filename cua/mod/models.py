@@ -18,9 +18,8 @@ class IDClass():
 
 class Tag(models.Model):
 	name = models.CharField(primary_key=True, max_length=128, editable=True)
-	description = models.CharField(max_length=512)
 	creation_date = models.DateTimeField(default=timezone.now)
-	creator = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_NULL)
+	creator = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.SET_NULL)
 
 	def __str__(self):
 		return f'{self.name}'
@@ -28,33 +27,26 @@ class Tag(models.Model):
 class Item(models.Model):
 	id = models.CharField(primary_key=True, default=IDClass.newID, max_length=12, editable=False)
 	name = models.CharField(max_length=128)
-	former_name = models.CharField(max_length=128, null=True, default=None)
+	former_name = models.CharField(max_length=128, null=True, blank=True, default=None)
 	description = models.CharField(max_length=512)
-	former_description = models.CharField(max_length=512, null=True, default=None)
-	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()), null=True)
+	former_description = models.CharField(max_length=512, null=True, blank=True, default=None)
+	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()))
 	creation_date = models.DateTimeField(default=timezone.now)
-	creator = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_DEFAULT)
+	creator = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.SET_DEFAULT)
+	tags = models.ManyToManyField(Tag)
 
 
 	def __str__ (self):
-		return f'{self.name}'
-
-class Tag_Request(models.Model):
-	name = models.CharField(primary_key=True, max_length=128, editable=True)
-	description = models.CharField(max_length=512)
-	creation_date = models.DateTimeField(default=timezone.now)
-	creator = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_NULL)
-
-	def __str__(self):
 		return f'{self.name}'
 
 class Item_Request(models.Model):
 	id = models.CharField(primary_key=True, default=IDClass.newID, max_length=12, editable=False)
 	name = models.CharField(max_length=128)
 	description = models.CharField(max_length=512)
-	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()), null=True)
+	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()))
 	creation_date = models.DateTimeField(default=timezone.now)
-	creator = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_DEFAULT)
+	creator = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.SET_DEFAULT)
+	tags = models.ManyToManyField(Tag)
 
 
 	def __str__ (self):

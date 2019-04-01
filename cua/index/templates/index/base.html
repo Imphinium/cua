@@ -45,7 +45,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'upload' %}">Subir</a>
                 </li>
-                <form action="{% url 'results' %}" method="post" class="form-inline my-2 my-lg-0" style="flex-flow:row!important;">
+                <form action="{% url 'results' %}" method="get" class="form-inline my-2 my-lg-0" style="flex-flow:row!important;">
                     {% csrf_token %}
                     <input type="text" name="query" class="form-control" placeholder="Tema a buscar" aria-label="Tema a buscar" aria-describedby="button-search">
                     <div class="input-group-append">

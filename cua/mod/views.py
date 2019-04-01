@@ -56,7 +56,9 @@ def approve(request, item_id):
 	newItem = Item(name=item.name,
 		description=item.description,
 		file=item.file,
-		creator=item.creator).save()
+		creator=item.creator)
+	newItem.save()
+	newItem.tags.set(item.tags.all())
 	item.delete()
 	return HttpResponseRedirect(reverse('input_mod'))
 

@@ -6,4 +6,3 @@ from .models import *
 admin.site.register(Item)
 admin.site.register(Tag)
 admin.site.register(Item_Request)
-admin.site.register(Tag_Request)
