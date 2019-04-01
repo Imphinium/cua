@@ -10,3 +10,7 @@
 .navbar-nav>.active>a {
 	opacity:.6;
 }
+
+.no-lp {
+	padding-left: 0px!important;
+}
