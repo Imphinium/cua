@@ -35,7 +35,7 @@ def details(request, item_id):
 		if item.exists():
 			context = {"item": item.get()}
 			return render(request, 'mod/details.html', context)
-	return HttpResponseRedirect(reverse('index'))
+	return HttpResponseRedirect(reverse('input_mod'))
 
 @staff_member_required
 def download(request, item_id, **kwargs):

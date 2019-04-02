@@ -5,28 +5,39 @@
 <div class="container">
     <div class="list-group">
         {% for item in input %}
-        <div onclick="location.href='{% url 'details_mod' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ item.name }}</h5>
-                <small>{{ item.creation_date|timesince }}</small>
+        <a href="#" onclick="location.href='{% url 'details_mod' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start ">
+            <div class="row justify-content-start align-items-center">
+                <div class="col-1">
+                {% if item.file %}{% octicon "file-zip" heigth="64" width="64" %}
+                {% elif item.video %}{% octicon "device-camera-video" heigth="64" width="64" %}
+                {% elif item.repo %}{% octicon "git-branch" heigth="64" width="64" %}
+                {% endif %}
             </div>
-            <p class="mb-1">{{ item.description }}</p>
-            <div class="d-flex">
-                <h6>{% for tag in item.tags.all %}<div onclick="location.href='{% url 'results' %}?tags={{ tag }}';event.stopPropagation();"  class="badge badge-primary">{{ tag }}</div> {% endfor %}</h6>
-                <div class="ml-auto">
+                <div class="col">
+                    <h5 class="mb-1">{{ item.name }}</h5>
+                    <p class="mb-1">{{ item.description }}</p>
+                    <h6>{% for tag in item.tags.all %}<div onclick="location.href='{% url 'results' %}?tags={{ tag }}';event.stopPropagation();" class="badge badge-primary">{{ tag }}</div> {% endfor %}</h6>
+                </div>
+                <div class="col-2 ml-auto d-flex flex-column">
+                    <small class="text-center">{{ item.creation_date|timesince }}</small><br>
+                    <div class="d-flex flex-row">
                     <button type="button" class="btn btn-large btn-success " onclick="location.href='{% url 'approve' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsup" fill="white" %}</button>
                     <button type="button" class="btn btn-large btn-danger " onclick="location.href='{% url 'deny' item_id=item.id %}';event.stopPropagation();">{% octicon "thumbsdown" fill="white" %}</button>
-                    <button class="btn btn-large btn-primary" onclick="location.href='{% url 'download_mod' item_id=item.id %}';event.stopPropagation();" download>Descargar</button>
+                    {% if item.file %}<div class="btn btn-large btn-info p-2" onclick="location.href='{% url 'download' item_id=item.id %}';event.stopPropagation();" download>Descargar</div>
+                    {% elif item.video %}<div class="btn btn-large btn-success p-2">Ver</div>
+                    {% elif item.repo %}<div class="btn btn-large btn-success p-2">Repositorio</div>
+                    {% endif %}
+                </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
         {% if not input %}
         <div class="jumbotron container">
             <div class="d-flex flex-sm-row flex-column-reverse">
                 <div class="col-lg-6 align-self-center no-lp">
                     <h3 class="mb-1">Lo sentimos</h3>
-                    <p class="mb-1">No se han encontrado mas solicitudes</p>
+                    <p class="mb-1">No se han encontrado resultados para su búsqueda</p>
                 </div>
                 <div class="col-lg-6 no-lp">
                     <img src="{% static 'index/sadbot.svg' %}" style="max-height:200px;">
