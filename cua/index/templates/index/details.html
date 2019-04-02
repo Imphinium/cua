@@ -76,8 +76,11 @@
     <div class="jumbotron text-center">
         <h1>{{ item.name }}</h1>
         <p class="lead">{{ item.description|linebreaks }}</p>
-        {% if item.file %}<p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>{% endif %}
-        {% if item.video %}<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ item.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>{% endif %}
+        {% if item.file %}<p><a class="btn btn-large btn-success" href="{% url 'download' item_id=item.id %}" download>Descargar</a></p>
+        {% elif item.video %}<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ item.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% elif item.repo %}<div class="github-card" data-github="{{ item.repo }}" data-width="400" data-height="278" data-theme="medium"></div>
+        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+        {% endif %}
     </div>
 </div>
 <hr>

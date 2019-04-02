@@ -32,6 +32,7 @@ class Item(models.Model):
 	former_description = models.CharField(max_length=512, null=True, blank=True, default=None)
 	file = models.FileField(upload_to="files/{0}".format(IDClass.newID()), null=True, blank=True)
 	video = models.CharField(max_length=11, null=True, blank=True)
+	repo = models.CharField(max_length=128, null=True, blank=True)
 	creation_date = models.DateTimeField(default=timezone.now)
 	creator = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.SET_DEFAULT)
 	tags = models.ManyToManyField(Tag)

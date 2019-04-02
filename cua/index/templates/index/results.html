@@ -8,7 +8,10 @@
         <a href="#" onclick="location.href='{% url 'details' item_id=item.id %}';" class="list-group-item list-group-item-action flex-column align-items-start ">
             <div class="row justify-content-start align-items-center">
                 <div class="col-1">
-                {% if item.file %}{% octicon "file-zip" heigth="64" width="64" %}{% elif item.video %}{% octicon "device-camera-video" heigth="64" width="64" %}{% endif %}
+                {% if item.file %}{% octicon "file-zip" heigth="64" width="64" %}
+                {% elif item.video %}{% octicon "device-camera-video" heigth="64" width="64" %}
+                {% elif item.repo %}{% octicon "git-branch" heigth="64" width="64" %}
+                {% endif %}
             </div>
                 <div class="col">
                     <h5 class="mb-1">{{ item.name }}</h5>
@@ -18,7 +21,9 @@
                 <div class="col-2 ml-auto d-flex flex-column">
                     <small class="text-center">{{ item.creation_date|timesince }}</small><br>
                     {% if item.file %}<div class="btn btn-large btn-success p-2" onclick="location.href='{% url 'download' item_id=item.id %}';event.stopPropagation();" download>Descargar</div>
-                    {% elif item.video %}<div class="btn btn-large btn-success p-2">Ver</div>{% endif %}
+                    {% elif item.video %}<div class="btn btn-large btn-success p-2">Ver</div>
+                    {% elif item.repo %}<div class="btn btn-large btn-success p-2">Repositorio</div>
+                    {% endif %}
                 </div>
             </div>
         </a>
