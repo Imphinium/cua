@@ -11,6 +11,18 @@ import os
 
 # Utilidades
 
+def validate_repo(repo):
+	u = requests.get("https://github.com/{0}".format(repo))
+	if u.status_code == 404:
+		return False
+	return True
+
+def validate_video(video):
+	u = requests.get("http://www.youtube.com/oembed?url=http://www.youtube.com/watch?v={0}&format=json".format(video))
+	if u.status_code == 404:
+		return False
+	return True
+
 def validate_tags(tags):
 	tags = tags.split(" ")
 	tagsObj = []
@@ -61,11 +73,22 @@ def upload(request):
 			tags = validate_tags(data["tags"])
 			itemReqObj = Item_Request(name=data["name"],
 				description=data["description"])
-			itemReqObj.file = data["file"]
+			if data["file"]:
+				itemReqObj.file = data["file"]
+			elif data["video"] != '':
+				if validate_video(data["video"]):
+					itemReqObj.video = data["video"]
+				else:
+					return JsonResponse({'error': True, 'errors': 'Incorrect video'})
+			elif data["repo"] != '':
+				if validate_repo(data["repo"]):
+					itemReqObj.repo = data["repo"]
+				else:
+					return JsonResponse({'error': True, 'errors': 'Incorrect repo'})
 			itemReqObj.save()
 			itemReqObj.tags.set(tags)
 
-			return JsonResponse({'error': True, 'message': 'Uploaded Successfully'})
+			return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
 		else:
 			return JsonResponse({'error': True, 'errors': form.errors})
 	else:

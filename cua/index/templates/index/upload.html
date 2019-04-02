@@ -1,6 +1,7 @@
 {% extends "index/base.html" %}
 {% block body_block %}
 {% load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'index/upload.css' %}" async>
 <div class="jumbotron text-center">
     <script type="text/javascript">
     var TxtRotate = function(el, toRotate, period) {
@@ -76,30 +77,136 @@
             <span id="tagContainer"></span>
             <input type="text" class="form-control" id="id_tags" aria-describedby="nameHelp" placeholder="Introduce las tags separadas por espacios" name="tags" required>
             <small id="tagsHelp" class="form-text text-muted">Deben de ser los temas con los que se relaciona tu contrinución, por ejemplo MD, Calculo, IngInf1, Multimedia3</small>
+            {# Atento la función esta está de putísima madre cuando cargas jQuery asíncronamente. Cuidao #}
+            <script type="text/javascript">
+            function tags_defer() {
+                if (window.jQuery) { //{# Esta función comprueba las tags y las formatea bonitas #}
+                    $(document).ready(function() {
+                        $("#id_tags").keyup(function(event) {
+                            let arr = $(this).val().split(" ")
+                            $("#tagContainer").empty()
+                            for (i in arr) {
+                                $("#tagContainer").append('   <span class="badge badge-info">' + (arr[i]) + '</span>');
+                            }
+                        });
+                    });
+                } else {
+                    setTimeout(function() { tags_defer() }, 50);
+                }
+            }
+            tags_defer();
+            </script>
         </div>
         <div class="form-group">
             <label for="id_description">Descripción</label>
             <textarea class="form-control" id="id_description" rows="3" name="description" required></textarea>
             <small id="descHelp" class="form-text text-muted">Asegurate de explicar los contenidos de los apuntes. Puedes introducir tu nombre o alguna tag para identificarlo fácilmente mas tarde</small>
         </div>
-        <div class="form-group">
-            <label for="id_file">Archivo</label>
-            <input type="file" class="form-control-file" id="id_file" name="file" required>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Archivo</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Repositorio</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Vídeo</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="form-group">
+                    <label for="id_file">Archivo</label>
+                    <input type="file" class="form-control-file" id="id_file" name="file" required>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <label for="id_repo">Repositorio</label><br>
+                <input type="text" class="form-control" id="id_repo" aria-describedby="nameHelp" placeholder="Usuario/Repositorio" name="repo" required>
+                <small id="repoHelp" class="form-text text-muted">Debe de estar en formato "{Usuario}/{Repositorio}". Por ejemplo, Imphinium/cua</small>
+                <script type="text/javascript">
+                function repo_defer() {
+                    if (window.jQuery) { //{# Esta función comprueba que el repositorio exista #}
+                        $(document).ready(function() {
+                            $("#id_repo").on("keyup", function(event) {
+                                var request = new XMLHttpRequest()
+                                request.open('GET', 'https://api.github.com/repos/' + $("#id_repo").val(), true)
+                                request.onload = function() {
+                                    console.log(request.status)
+                                    if (request.status == 404) {
+                                        $("#id_repo").removeClass("is-valid")
+                                        $("#id_repo").addClass("is-invalid")
+                                    } else if (request.status == 200) {
+                                        $("#id_repo").removeClass("is-invalid")
+                                        $("#id_repo").addClass("is-valid")
+                                    } else {
+                                        $("#repoHelp").text("No se puede contactar con GitHub ahora mismo. Lo cual no quiere decir que el repositorio no exista, sino que has superado las 60 querys gratuitas a la hora. Intentalo mas tarde o envíalo y deja que el servidor compruebe la autenticidad del repo.")
+                                    }
+                                }
+                                request.send()
+                            });
+                        });
+                    } else {
+                        setTimeout(function() { tags_defer() }, 50);
+                    }
+                }
+                repo_defer();
+                </script>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <label for="id_video">Video de Youtube</label><br>
+                <input type="text" class="form-control" id="id_video" aria-describedby="nameHelp" placeholder="Introduce la ID del video" name="video" required>
+                <small id="videoHelp" class="form-text text-muted">La ID es lo que va en "watch?v={ID}". Por ahora solo aceptamos vídeos de YT</small>
+                <script type="text/javascript">
+                function vides_defer() {
+                    if (window.jQuery) { //{# Esta función comprueba que el repositorio exista #}
+                        $(document).ready(function() {
+                            $("#id_video").on("keyup", function(event) {
+                                var img = new Image();
+                                img.src = 'http://img.youtube.com/vi/' + $("#id_video").val() + '/mqdefault.jpg'
+                                img.onload = function() {
+                                    console.log(this.width)
+                                    if (this.width === 120) {
+                                        $("#id_video").removeClass("is-valid")
+                                        $("#id_video").addClass("is-invalid")
+                                    } else if (this.width === 320) {
+                                        $("#id_video").removeClass("is-invalid")
+                                        $("#id_video").addClass("is-valid")
+                                    } else {
+                                        $("#repoHelp").text("Se ha detectado un error no reconocido. ¿Que has hecho, pilluel@? :/")
+                                    }
+                                }
+                            });
+                        });
+                    } else {
+                        setTimeout(function() { tags_defer() }, 50);
+                    }
+                }
+                vid_defer();
+                </script>
+            </div>
         </div>
+        <script type="text/javascript">
+        function tab_defer() {
+            if (window.jQuery) { //{# Esta función comprueba que el repositorio exista #}
+                $(document).ready(function() {
+                    $('[data-toggle="tab"]').on("click", function(event) {
+                        console.log("a")
+                        $("#id_video").val("")
+                        $("#id_video").removeClass("is-valid")
+                        $("#id_video").removeClass("is-invalid")
+
+                        $("#id_repo").val("")
+                        $("#id_repo").removeClass("is-valid")
+                        $("#id_repo").removeClass("is-invalid")
+
+                        $("#id_file").val("")
+                    });
+                });
+            } else {
+                setTimeout(function() { tags_defer() }, 50);
+            }
+        }
+        tab_defer();
+        </script>
         <input type="submit" />
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#id_tags").keyup(function(event) {
-            let arr = $(this).val().split(" ")
-            $("#tagContainer").empty()
-            for (i in arr) {
-                $("#tagContainer").append('   <span class="badge badge-info">' + (arr[i]) + '</span>');
-            }
-        });
-    });
-    </script>
     <script type="text/javascript">
     // form upload
     $('#id_ajax_upload_form').submit(function(e) {

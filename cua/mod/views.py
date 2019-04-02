@@ -55,8 +55,13 @@ def approve(request, item_id):
 	item = Item_Request.objects.get(id=item_id)
 	newItem = Item(name=item.name,
 		description=item.description,
-		file=item.file,
 		creator=item.creator)
+	if item.file:
+		newItem.file = item.file
+	elif item.repo:
+		newItem.repo = item.repo
+	elif item.video:
+		newItem.video = item.video
 	newItem.save()
 	newItem.tags.set(item.tags.all())
 	item.delete()
