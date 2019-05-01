@@ -4,3 +4,5 @@ env/**
 cua/db.sqlite3
 cua/cua/settings.py
 **/files/**
+banner.png
+banner.svg
